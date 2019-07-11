@@ -1,1 +1,1 @@
-web: gunicorn cookbook:app
+web: gunicorn issuetrack.wsgi

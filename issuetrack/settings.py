@@ -25,7 +25,7 @@ SECRET_KEY = 'sihgpihc3b9zth)1sd#2cxwc9w_-za8_0!8cnhuny%4z5!w9m)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'https://issuetrack2019.herokuapp.com']
 
 
 # Application definition
