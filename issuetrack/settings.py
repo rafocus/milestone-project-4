@@ -36,7 +36,7 @@ DATABASES = {
 SECRET_KEY = env('SECRET_KEY')
 
 
-ALLOWED_HOSTS = ['localhost', 'https://issuetrack2019.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'issuetrack2019.herokuapp.com']
 
 
 # Application definition
