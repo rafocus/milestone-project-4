@@ -1,12 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>issuetrack</title>
-</head>
-<body>
-    home page
-</body>
-</html>
+{% extends 'main/base.html' %}
+{% block content %}
+{% for ticket in tickets %}
+<div class="media m-4">
+    <img src="https://dummyimage.com/50'" class="mr-3" alt="...">
+    <div class="media-body">
+        <a class="text-muted" href="#">view all tickets by {{ ticket.author }}</a>
+        <p>{{ ticket.author}} on {{ ticket.date }}</p>
+        <p class="text-muted">{{ ticket.date }}</p>
+        <h5 class="mt-0">{{ ticket.title }}</h5>
+        {{ ticket.description }}
+    </div>
+    <a href="#" class="btn btn-outline-secondary m-4">Details</a>
+</div>
+{% endfor %}
+{% endblock content %}
