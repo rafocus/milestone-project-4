@@ -1,0 +1,13 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<div class="media m-4">
+    <img src="https://dummyimage.com/50'" class="mr-3" alt="...">
+    <div class="media-body">
+        <a class="text-muted" href="#">view all tickets by {{ object.author }}</a>
+        <p>{{ object.author}} on {{ object.date }}</p>
+        <p class="text-muted">{{ object.date }}</p>
+        <h5 class="mt-0">{{ object.title }}</h5>
+        {{ object.description }}
+    </div>
+</div>
+{% endblock content %}
