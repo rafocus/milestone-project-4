@@ -6,6 +6,12 @@
         <a class="text-muted" href="#">view all tickets by {{ object.author }}</a>
         <p>{{ object.author}} on {{ object.date }}</p>
         <p class="text-muted">{{ object.date }}</p>
+        <div>
+            {% if object.author == user %}
+            <a class="btn btn-secondary btn-sm m-1" href="{% url 'ticket-update' object.id %}">Update</a>
+            <a class="btn btn-danger btn-sm m-1" href="{% url 'ticket-delete' object.id %}">Delete</a>
+            {% endif %}
+        </div>
         <h5 class="mt-0">{{ object.title }}</h5>
         {{ object.description }}
     </div>
