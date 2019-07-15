@@ -7,6 +7,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 class TicketListView(ListView): # generic list view, variable passed is object_list
     model = Ticket
     ordering = ['-date']
+    paginate_by = 2
 
 class TicketDetailView(DetailView): #generic detail view, variable passed is object
     model = Ticket
