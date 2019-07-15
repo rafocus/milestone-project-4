@@ -10,7 +10,7 @@
         <h5 class="mt-0">{{ object.title }}</h5>
         {{ object.description }}
     </div>
-    <a href="#" class="btn btn-outline-secondary m-4">Details</a>
+    <a class="btn btn-outline-secondary m-4" href="{% url 'ticket-detail' object.id %}">Details</a>
 </div>
 {% endfor %}
 {% endblock content %}
