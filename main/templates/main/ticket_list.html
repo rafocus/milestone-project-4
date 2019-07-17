@@ -1,25 +1,37 @@
 {% extends 'main/base.html' %}
 {% block content %}
 {% for object in object_list %}
-<div class="media m-4">
-    <img src="https://dummyimage.com/50'" class="mr-3" alt="...">
-    <div class="media-body">
-        <a class="text-muted" href="#">view all tickets by {{ object.author }}</a>
-        <p>{{ object.author}} on {{ object.date }}</p>
-        <p class="text-muted">{{ object.date }}</p>
-        <h5 class="mt-0">{{ object.title }}</h5>
-        {{ object.description }}
+<div class="media m-4 p-2
+{% if object.status == 'In progress' %}
+    inprogress
+    {% elif object.status == 'Completed' %}
+    completed
+    {% else %}
+    pending
+    {% endif %}
+">
+  <div class="media-body">
+    <span class="text-muted">Ticket Number: {{ object.id }}</span>
+    <h5 class="mt-0">{{ object.title }}</h5>
+    <span>Created by {{ object.author}} on {{ object.date }}</span>
+    <span><a class="text-muted" href="#">view all tickets by {{ object.author }}</a></span>
+    <span class="bg-secondary text-white float-right p-1">Status: {{ object.status }}</span>
+
+    <hr>
+    <div>
+      {{ object.description|truncatewords:25 }}
     </div>
-    <a class="btn btn-outline-secondary m-4" href="{% url 'ticket-detail' object.id %}">Details</a>
+  </div>
+  <a class="btn btn-outline-secondary m-4" href="{% url 'ticket-detail' object.id %}">Details</a>
 </div>
 {% endfor %}
 {% if is_paginated %}
-      {% if page_obj.has_previous %}
-        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-      {% endif %}
-      <a class="btn btn-info mb-4" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a>
-      {% if page_obj.has_next %}
-        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
-      {% endif %}
-    {% endif %}
+{% if page_obj.has_previous %}
+<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+{% endif %}
+<a class="btn btn-info mb-4" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a>
+{% if page_obj.has_next %}
+<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+{% endif %}
+{% endif %}
 {% endblock content %}

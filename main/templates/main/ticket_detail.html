@@ -1,19 +1,36 @@
 {% extends 'main/base.html' %}
 {% block content %}
-<div class="media m-4">
-    <img src="https://dummyimage.com/50'" class="mr-3" alt="...">
+<div class="media m-4 p-2 
+    {% if object.status == 'In progress' %}
+    inprogress
+    {% elif object.status == 'Completed' %}
+    completed
+    {% else %}
+    pending
+    {% endif %}
+    ">
     <div class="media-body">
-        <a class="text-muted" href="#">view all tickets by {{ object.author }}</a>
-        <p>{{ object.author}} on {{ object.date }}</p>
-        <p class="text-muted">{{ object.date }}</p>
+        <h5 class="mt-0">{{ object.title }}</h5>
+
+        <span>Created by {{ object.author}} on {{ object.date }}</span>
+        <span><a class="text-muted" href="#">view all tickets by {{ object.author }}</a></span>
+        <span class="bg-secondary text-white float-right p-1">Status: {{ object.status }}</span>
+
+        <hr>
+        {{ object.description }}
+        <hr>
         <div>
             {% if object.author == user %}
-            <a class="btn btn-secondary btn-sm m-1" href="{% url 'ticket-update' object.id %}">Update</a>
-            <a class="btn btn-danger btn-sm m-1" href="{% url 'ticket-delete' object.id %}">Delete</a>
+            <a class="btn btn-secondary btn-sm" href="{% url 'ticket-update' object.id %}">Update</a>
+            <a class="btn btn-danger btn-sm" href="{% url 'ticket-delete' object.id %}">Delete</a>
             {% endif %}
+            {% if user not in object.votes.all %}
+            <a class="btn btn-secondary btn-sm" href="{% url 'vote' object.id %}">Vote</a>
+            {% else %}
+            <a class="btn btn-secondary btn-sm" href="{% url 'vote' object.id %}">Cancel Vote</a>
+            {% endif %}
+            <span class="btn btn-secondary btn-sm float-right">Number of votes: {{ object.votes.count }}</span>
         </div>
-        <h5 class="mt-0">{{ object.title }}</h5>
-        {{ object.description }}
     </div>
 </div>
 {% endblock content %}

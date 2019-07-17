@@ -42,6 +42,7 @@ ALLOWED_HOSTS = ['localhost', 'issuetrack2019.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'vote.apps.VoteConfig',
     'users.apps.UsersConfig',
     'main.apps.MainConfig',
     'crispy_forms',

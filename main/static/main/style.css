@@ -1,2 +1,15 @@
-.media {
-    background-color: rgb(195, 223, 220)
+/* .media {
+    background-color: rgb(195, 223, 220);
+} */
+
+.completed {
+    background-color: rgb(192, 238, 188);
+}
+
+.pending {
+    background-color: rgb(248, 205, 205);
+}
+
+.inprogress {
+    background-color: rgb(232, 236, 163);
+}

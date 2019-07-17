@@ -1,20 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Ticket
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, RedirectView
 
 
 class TicketListView(ListView): # generic list view, variable passed is object_list
     model = Ticket
     ordering = ['-date']
-    paginate_by = 2
+    paginate_by = 10
 
 class TicketDetailView(DetailView): #generic detail view, variable passed is object
     model = Ticket
 
 class TicketCreateView(LoginRequiredMixin, CreateView):
     model = Ticket
-    fields = ['title', 'description']
+    fields = ['title', 'ticket_type', 'status', 'description']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -22,7 +22,7 @@ class TicketCreateView(LoginRequiredMixin, CreateView):
 
 class TicketUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Ticket
-    fields = ['title', 'description']
+    fields = ['title', 'ticket_type', 'status', 'description']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -46,3 +46,14 @@ class TicketDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 def about(request):
     return render(request, 'main/about.html')
+
+def votetoggle(request, pk):
+    print(request)
+    obj = get_object_or_404(Ticket, pk=pk)
+    user = request.user
+    if user.is_authenticated:
+        if user in obj.votes.all():
+            obj.votes.remove(user)
+        else:
+            obj.votes.add(user)
+    return redirect('ticket-detail', pk)
