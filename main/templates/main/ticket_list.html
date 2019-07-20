@@ -2,7 +2,7 @@
 {% block content %}
 {% for object in object_list %}
 <div class="media m-4 p-2
-{% if object.status == 'In progress' %}
+{% if object.status == 'In progress' %} 
     inprogress
     {% elif object.status == 'Completed' %}
     completed

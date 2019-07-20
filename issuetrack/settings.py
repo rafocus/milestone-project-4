@@ -42,8 +42,8 @@ ALLOWED_HOSTS = ['localhost', 'issuetrack2019.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
-    "whitenoise.runserver_nostatic",
-    'vote.apps.VoteConfig',
+    'carts.apps.CartsConfig',
+    'whitenoise.runserver_nostatic',
     'users.apps.UsersConfig',
     'main.apps.MainConfig',
     'crispy_forms',

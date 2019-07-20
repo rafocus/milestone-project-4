@@ -48,7 +48,6 @@ def about(request):
     return render(request, 'main/about.html')
 
 def votetoggle(request, pk):
-    print(request)
     obj = get_object_or_404(Ticket, pk=pk)
     user = request.user
     if user.is_authenticated:

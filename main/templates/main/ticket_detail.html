@@ -17,7 +17,7 @@
         <span class="bg-secondary text-white float-right p-1">Status: {{ object.status }}</span>
 
         <hr>
-        {{ object.description }}
+        {{ object.description|linebreaks }}
         <hr>
         <div>
             {% if object.author == user %}
