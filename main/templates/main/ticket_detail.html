@@ -32,6 +32,7 @@
             <span class="btn btn-secondary btn-sm float-right">Number of votes: {{ object.votes.count }}</span>
         </div>
         <div>
+            {% if object.ticket_type == 'Feature' %}
             <form method="post" action="{% url 'add-to-cart' object.id %}">
                 {% csrf_token %}
                 <div class="input-group">
@@ -41,6 +42,7 @@
                     </span>
                 </div>
             </form>
+            {% endif %}
         </div>
     </div>
 </div>
