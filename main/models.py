@@ -28,6 +28,8 @@ class Ticket(models.Model):
     description = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     votes = models.ManyToManyField(User, related_name='votes', blank=True)
+    funding = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
+    funding_target = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
 
     def __str__(self):
         return self.title

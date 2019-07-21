@@ -1,0 +1,23 @@
+{% extends "main/base.html" %}
+{% block content %}
+<h1>Cart</h1>
+<p>Total payment: &euro;{{ total }}</p>
+
+{% for item in cart_items %}
+<p>{{ item.ticket.title }}</p>
+<p>{{ item.payment }}</p>
+<p>{{ item.id }}</p>
+<form class="form-inline" method="post" action="{% url 'adjust-cart' item.id %}">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="exampleInputAmount" class="sr-only">New Payment</label>
+        <div class="input-group">
+            <div class="input-group-addon">Payment</div>
+            <input name="payment" type="number" min="0" max="999" class="form-control" required>
+            <div class="input-group-addon">{{item.payment}}</div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-secondary"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Update</button>
+</form>
+{% endfor %}
+{% endblock content %}

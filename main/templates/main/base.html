@@ -23,11 +23,11 @@
             <div class="collapse navbar-collapse" id="navbarToggle">
                 <div class="navbar-nav mr-auto">
                     <a class="nav-item nav-link" href="#">Search</a>
-                    <a class="nav-item nav-link active" href="{% url 'main-about' %}">About</a>
+                    <a class="nav-item nav-link active" href="{% url 'cart' %}">Cart</a>
                 </div>
                 <div class="navbar-nav">
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="GET">
+                        <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search" aria-label="Search">
                         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                     </form>
                     <!-- display login, register, logout, depending if the user is authenticated -->

@@ -56,3 +56,7 @@ def votetoggle(request, pk):
         else:
             obj.votes.add(user)
     return redirect('ticket-detail', pk)
+
+def search_tickets(request):
+    tickets = Ticket.objects.filter(title__icontains=request.GET['q'])
+    return render(request, "main/ticket_list.html", {"object_list": tickets})

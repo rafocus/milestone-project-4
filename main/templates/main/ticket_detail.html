@@ -31,6 +31,17 @@
             {% endif %}
             <span class="btn btn-secondary btn-sm float-right">Number of votes: {{ object.votes.count }}</span>
         </div>
+        <div>
+            <form method="post" action="{% url 'add-to-cart' object.id %}">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input name="payment" type="number" min="5" max="999" class="form-control" placeholder="payment" required>
+                    <span class="input-group-btn">
+                        <button class="btn btn-success" type="submit">Add</button>
+                    </span>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock content %}
