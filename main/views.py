@@ -60,3 +60,11 @@ def votetoggle(request, pk):
 def search_tickets(request):
     tickets = Ticket.objects.filter(title__icontains=request.GET['q'])
     return render(request, "main/ticket_list.html", {"object_list": tickets})
+
+def features(request):
+    tickets = Ticket.objects.filter(ticket_type='Feature')
+    return render(request, "main/ticket_list.html", {"object_list": tickets})
+
+def bugs(request):
+    tickets = Ticket.objects.filter(ticket_type='Bug')
+    return render(request, "main/ticket_list.html", {"object_list": tickets})

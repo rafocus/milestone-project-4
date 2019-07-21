@@ -1,18 +1,20 @@
 {% extends 'main/base.html' %}
 {% block content %}
 {% for object in object_list %}
-<div class="media m-4 p-2
-{% if object.status == 'In progress' %} 
+<div class="media m-4 p-2 ticket-bg">
+  <div class="media-body">
+    <div class="pl-2
+    {% if object.status == 'In progress' %} 
     inprogress
     {% elif object.status == 'Completed' %}
     completed
     {% else %}
     pending
     {% endif %}
-">
-  <div class="media-body">
-    <span class="text-muted">Ticket Number: {{ object.id }}</span>
-    <h5 class="mt-0">{{ object.title }}</h5>
+    ">
+      <span class="text-muted">Ticket Number: {{ object.id }}</span>
+      <h5 class="mt-0">{{ object.title }}</h5>
+    </div>
     <span>Created by {{ object.author}} on {{ object.date }}</span>
     <span><a class="text-muted" href="#">view all tickets by {{ object.author }}</a></span>
     <span class="bg-secondary text-white float-right p-1">Status: {{ object.status }}</span>

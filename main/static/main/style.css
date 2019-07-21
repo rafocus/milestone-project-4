@@ -2,6 +2,10 @@
     background-color: rgb(195, 223, 220);
 } */
 
+.ticket-bg {
+    background-color: rgb(176, 212, 221);
+}
+
 .completed {
     background-color: rgb(192, 238, 188);
 }
