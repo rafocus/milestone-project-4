@@ -42,6 +42,7 @@ ALLOWED_HOSTS = ['localhost', 'issuetrack2019.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'checkout.apps.CheckoutConfig',
     'carts.apps.CartsConfig',
     'whitenoise.runserver_nostatic',
     'users.apps.UsersConfig',
