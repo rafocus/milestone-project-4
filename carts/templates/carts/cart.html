@@ -20,4 +20,7 @@
     <button type="submit" class="btn btn-secondary"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Update</button>
 </form>
 {% endfor %}
+{% if total > 0 %}
+<a class="btn btn-info" href="{% url 'checkout' %}">Checkout</a>
+{% endif %}
 {% endblock content %}
