@@ -2,6 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block head_js %}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script type="text/javascript">
     //<![CDATA[
@@ -23,7 +24,7 @@
     <p>Total: &euro;{{ total }}</p>
 </div>
 
-<form role="form" method="post" id="payment-form" action="{% url 'checkout' %}">
+<form role="form" method="POST" id="payment-form" action="{% url 'checkout' %}">
         {% csrf_token %}
     <legend>Payment Details</legend>
 
@@ -32,13 +33,9 @@
     </div>
 
     <div class="form-group col-md-6">
-        {{ order_form | crispy }}
+        {{ order_form|crispy }}
+        {{ payment_form|crispy }}
     </div>
-
-    <div class="form-group col-md-6">
-        {{ payment_form | crispy }}
-    </div>
-
     <div class="form-group col-md-12">
         <input class=" btn btn-primary" id="submit_payment_btn" name="commit" type="submit" value="Submit Payment">
     </div>

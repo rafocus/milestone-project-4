@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 from main.models import Ticket
 
 class Order(models.Model):
@@ -11,7 +10,7 @@ class Order(models.Model):
     street_address1 = models.CharField(max_length=40, blank=False)
     street_address2 = models.CharField(max_length=40, blank=False)
     county = models.CharField(max_length=40, blank=False)
-    date = models.DateTimeField(default=timezone.now)
+    date = models.DateField()
 
     def __str__(self):
         return f"Order('{self.id}', '{self.date}', '{self.full_name}')"
