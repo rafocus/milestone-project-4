@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Ticket
+from comments.models import Comment
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, RedirectView
 
 
@@ -9,8 +10,8 @@ class TicketListView(ListView): # generic list view, variable passed is object_l
     ordering = ['-date']
     paginate_by = 10
 
-class TicketDetailView(DetailView): #generic detail view, variable passed is object
-    model = Ticket
+# class TicketDetailView(DetailView): #generic detail view, variable passed is object
+#     model = Ticket
 
 class TicketCreateView(LoginRequiredMixin, CreateView):
     model = Ticket
@@ -56,6 +57,12 @@ def votetoggle(request, pk):
         else:
             obj.votes.add(user)
     return redirect('ticket-detail', pk)
+
+def ticket_detail(request, pk):
+    ticket = get_object_or_404(Ticket, pk=pk)
+    # user = request.user
+    comments = Comment.objects.filter(ticket=ticket)
+    return render(request, 'main/ticket_detail.html', {"object": ticket, "pk":pk, "comments": comments})
 
 def search_tickets(request):
     tickets = Ticket.objects.filter(title__icontains=request.GET['q'])

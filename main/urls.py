@@ -1,7 +1,6 @@
 from django.urls import path
 from .views import (
     TicketListView,
-    TicketDetailView,
     TicketCreateView,
     TicketUpdateView,
     TicketDeleteView,
@@ -10,7 +9,7 @@ from . import views
 
 urlpatterns = [
     path('', TicketListView.as_view(), name='main-home'),
-    path('ticket/<int:pk>/', TicketDetailView.as_view(), name='ticket-detail'),
+    path('ticket/<int:pk>/', views.ticket_detail, name='ticket-detail'),
     path('ticket/<int:pk>/vote', views.votetoggle, name='vote'),
     path('ticket/new/', TicketCreateView.as_view(), name='ticket-create'),
     path('ticket/<int:pk>/update/', TicketUpdateView.as_view(), name='ticket-update'),
