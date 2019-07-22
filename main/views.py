@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Ticket
 from comments.models import Comment
+from comments.forms import CommentForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, RedirectView
 
 
@@ -60,9 +61,20 @@ def votetoggle(request, pk):
 
 def ticket_detail(request, pk):
     ticket = get_object_or_404(Ticket, pk=pk)
-    # user = request.user
+    user = request.user
     comments = Comment.objects.filter(ticket=ticket)
-    return render(request, 'main/ticket_detail.html', {"object": ticket, "pk":pk, "comments": comments})
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment_form.instance.user = user
+            comment_form.instance.ticket = ticket
+            comment_form.save()
+            return redirect('ticket-detail', pk)
+        else:
+            comment_form = CommentForm()
+    else:
+            comment_form = CommentForm()
+    return render(request, 'main/ticket_detail.html', {"object": ticket, "pk":pk, "comments": comments, 'comment_form': comment_form})
 
 def search_tickets(request):
     tickets = Ticket.objects.filter(title__icontains=request.GET['q'])

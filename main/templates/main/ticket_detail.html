@@ -46,6 +46,13 @@
         </div>
     </div>
 </div>
+<form action="" method="POST">
+     {% csrf_token %}
+     {{ comment_form }}
+     <div>
+        <button class='btn btn-outline-info' type="submit">Comment</button>
+     </div>
+</form>
 {% if comments %}
 <div>
     {% for comment in comments %}
