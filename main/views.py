@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Ticket
 from comments.models import Comment
 from comments.forms import CommentForm
+from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, RedirectView
 
 
@@ -64,13 +65,17 @@ def ticket_detail(request, pk):
     user = request.user
     comments = Comment.objects.filter(ticket=ticket)
     if request.method == 'POST':
-        comment_form = CommentForm(request.POST)
-        if comment_form.is_valid():
-            comment_form.instance.user = user
-            comment_form.instance.ticket = ticket
-            comment_form.save()
-            return redirect('ticket-detail', pk)
+        if user.is_authenticated:
+            comment_form = CommentForm(request.POST)
+            if comment_form.is_valid():
+                    comment_form.instance.user = user
+                    comment_form.instance.ticket = ticket
+                    comment_form.save()
+                    return redirect('ticket-detail', pk)
+            else:
+                comment_form = CommentForm()
         else:
+            messages.error(request, 'Please login to comment')
             comment_form = CommentForm()
     else:
             comment_form = CommentForm()
