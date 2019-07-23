@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/rafocus/milestone-project-4.svg?branch=master)](https://travis-ci.org/rafocus/milestone-project-4)
 # Milestone project 4
 ## Issue Tracker
 
