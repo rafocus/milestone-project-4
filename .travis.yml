@@ -6,7 +6,7 @@ before_install:
 install: 
   - pip install -r requirements.txt
 env:
-  - SQLITE_URL=sqlite:///my-local-sqlite.db
+  - DATABASE_URL=sqlite:///my-local-sqlite.db
   - SECRET_KEY='secret_key'
 script:
   -  python manage.py test
