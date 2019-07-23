@@ -8,8 +8,5 @@ class Comment(models.Model):
     timestamp = models.DateTimeField(auto_now=True)
     content = models.TextField()
 
-    class Meta:
-        ordering = ['-timestamp']
-
     def __str__(self):
         return self.user.username

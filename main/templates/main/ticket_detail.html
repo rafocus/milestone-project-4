@@ -1,65 +1,85 @@
 {% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
-<div class="media m-4 p-2">
-    <div class="media-body">
-        <div class="
-        {% if object.status == 'In progress' %}
-        inprogress
-        {% elif object.status == 'Completed' %}
-        completed
-        {% else %}
-        pending
+<div class="row ticket-bg-d p-2 mt-2
+    {% if object.status == 'In progress' %}
+    inprogress
+    {% elif object.status == 'Completed' %}
+    completed
+    {% else %}
+    pending
+    {% endif %}
+    ">
+    <div class="col">
+        <div class="row pl-2">
+            <h5 class="">{{ object.title }} ({{object.ticket_type}})</h5>
+        </div>
+        <div class="row">
+            <div class="row">
+                <div class="col small">Created by {{ object.author}} ({{ object.date|timesince }}) ago</div>
+                <div class="col small"><a class="text-muted" href="#">view all tickets by {{ object.author }}</a></div>
+                <div class="col small">Status: {{ object.status }}</div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<div class=" row ticket-bg-l p-2">
+    {{ object.description|linebreaks }}
+</div>
+<div class="row ticket-bg-d p-2">
+    <div class="col-6">
+        {% if object.author == user %}
+        <a class="btn btn-secondary btn-sm" href="{% url 'ticket-update' object.id %}">Update</a>
+        <a class="btn btn-danger btn-sm" href="{% url 'ticket-delete' object.id %}">Delete</a>
         {% endif %}
-        ">
-        <h5 class="mt-0">{{ object.title }}</h5>
-        <span>Created by {{ object.author}} on {{ object.date }}</span>
-        <span><a class="text-muted" href="#">view all tickets by {{ object.author }}</a></span>
-        <span class="bg-secondary text-white float-right p-1">Status: {{ object.status }}</span>
-        </div>
-        <hr>
-        {{ object.description|linebreaks }}
-        <hr>
-        <div>
-            {% if object.author == user %}
-            <a class="btn btn-secondary btn-sm" href="{% url 'ticket-update' object.id %}">Update</a>
-            <a class="btn btn-danger btn-sm" href="{% url 'ticket-delete' object.id %}">Delete</a>
-            {% endif %}
-            {% if user not in object.votes.all %}
-            <a class="btn btn-secondary btn-sm" href="{% url 'vote' object.id %}">Vote</a>
-            {% else %}
-            <a class="btn btn-secondary btn-sm" href="{% url 'vote' object.id %}">Cancel Vote</a>
-            {% endif %}
-            <span class="btn btn-secondary btn-sm float-right">Number of votes: {{ object.votes.count }}</span>
-        </div>
-        <div>
-            {% if object.ticket_type == 'Feature' %}
-            <form method="post" action="{% url 'add-to-cart' object.id %}">
-                {% csrf_token %}
-                <div class="input-group">
-                    <input name="payment" type="number" min="5" max="999" class="form-control" placeholder="payment" required>
-                    <span class="input-group-btn">
-                        <button class="btn btn-success" type="submit">Add</button>
-                    </span>
-                </div>
-            </form>
-            {% endif %}
-        </div>
+        {% if user not in object.votes.all %}
+        <a class="btn btn-secondary btn-sm" href="{% url 'vote' object.id %}">Vote ({{ object.votes.count }})</a>
+        {% else %}
+        <a class="btn btn-secondary btn-sm" href="{% url 'vote' object.id %}">Cancel Vote ({{ object.votes.count }})</a>
+        {% endif %}
+    </div>
+    <div class="col-3">
+        {% if object.ticket_type == 'Feature' %}
+        <form method="post" action="{% url 'add-to-cart' object.id %}">
+            {% csrf_token %}
+            <div class="input-group">
+                <input name="payment" type="number" min="5" max="999" class="form-control" placeholder="payment"
+                    required>
+                <span class="input-group-btn ml-1">
+                    <button class="btn btn-success" type="submit">Add to cart</button>
+                </span>
+            </div>
+        </form>
+        {% endif %}
     </div>
 </div>
-<form action="" method="POST">
-     {% csrf_token %}
-     {{ comment_form }}
-     <div>
-        <button class='btn btn-outline-info' type="submit">Comment</button>
-     </div>
-</form>
 {% if comments %}
-<div>
-    {% for comment in comments %}
-    <div>
-        {{ comment.content }}
+<div class="row mt-3">
+    <div class="col">
+        {% for comment in comments %}
+        <div class="row p-2 {% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}">
+            <div class="col">
+                <p class="text-muted small">by: {{ comment.user }} ({{ comment.timestamp|timesince }})</p>
+                <p>{{ comment.content|linebreaks }}</p>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 {% endif %}
+<div class="row mt-3">
+    <div class="col">
+        <form class="" method="POST">
+            {% csrf_token %}
+            <div class="comment">
+                {{ comment_form|crispy }}
+            </div>
+            <div>
+                <button class='btn btn-outline-info' type="submit">Comment</button>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock content %}
