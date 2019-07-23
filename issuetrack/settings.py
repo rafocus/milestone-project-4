@@ -35,7 +35,9 @@ env.read_env('.env')
 DEBUG = env('DEBUG')
 
 DATABASES = {
-    "default": env.db()
+    "default": env.db(),
+    # read os.environ['SQLITE_URL']
+    'extra': env.db('SQLITE_URL', default='sqlite:////tmp/my-tmp-sqlite.db')
 }
 
 # Quick-start development settings - unsuitable for production
