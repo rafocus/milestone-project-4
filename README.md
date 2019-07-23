@@ -13,8 +13,10 @@ Password: testpass1
 
 ### Wireframes: 
 
-<img src="design/wireframes/desktop_list.png" height="300"/> <img src="design/wireframes/desktop_detail.png" height="300"/>
-<img src="design/wireframes/mobile_list.png"  height="300"/> <img src="design/wireframes/mobile_detail.png"  height="300"/>
+<img src="design/wireframes/desktop_list.png" height="300"/>
+<img src="design/wireframes/mobile_list.png"  height="300"/>  
+<img src="design/wireframes/desktop_detail.png" height="300"/>
+<img src="design/wireframes/mobile_detail.png"  height="300"/>
 
 ### User stories:
 
