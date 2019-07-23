@@ -3,6 +3,10 @@ python:
   - '3.7'
 before_install:
   - chmod +x manage.py
-install: 'pip install -r requirements.txt'
+install: 
+  - pip install -r requirements.txt
+env:
+  - SQLITE_URL=sqlite:///my-local-sqlite.db
+  - SECRET_KEY='secret_key'
 script:
-  - SECRET_KEY='secret_key' ./manage.py test
+  -  python manage.py test
