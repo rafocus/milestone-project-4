@@ -1,0 +1,42 @@
+body {
+    padding-bottom: 5rem;
+    background-color: white)
+}
+
+.ticket-bg-d {
+    background-color: rgb(176, 212, 221);
+}
+
+.ticket-bg-l {
+    background-color: rgb(199, 233, 241);
+}
+
+.completed {
+    border-left-style: solid;
+    border-left-color: green;
+    border-left-width: 10px;    
+}
+
+.pending {
+    border-left-style: solid;
+    border-left-color: red;
+    border-left-width: 10px;
+}
+
+.inprogress {
+    border-left-style: solid;
+    border-left-color: yellow;
+    border-left-width: 10px;
+}
+
+.comment textarea {
+    height: 70px;
+}
+
+.odd {
+    background-color: rgb(218, 218, 218);
+}
+
+.even {
+    background-color: rgb(240, 240, 240);
+}
