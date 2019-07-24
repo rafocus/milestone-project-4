@@ -46,8 +46,13 @@ def checkout(request):
                 messages.error(request, "Your card was declined!")
                 
             if customer.paid:
+                for id, payment in cart.items():
+                    ticket = get_object_or_404(Ticket, pk=id)
+                    ticket.funding = ticket.funding + payment
+                    ticket.save(update_fields=["funding"])
                 messages.success(request, "You have successfully paid")
                 request.session['cart'] = {}
+
                 return redirect('main-home')
             else:
                 messages.error(request, "Unable to take payment")
