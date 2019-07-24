@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Ticket
 from comments.models import Comment
+from django.db.models import Count
 from comments.forms import CommentForm
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, RedirectView
@@ -11,6 +12,7 @@ class TicketListView(ListView): # generic list view, variable passed is object_l
     model = Ticket
     ordering = ['-date']
     paginate_by = 10
+    queryset = Ticket.objects.annotate(num_comments=Count('comment')) # aggregate comment numbers
 
 # class TicketDetailView(DetailView): #generic detail view, variable passed is object
 #     model = Ticket

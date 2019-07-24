@@ -18,10 +18,15 @@
     <span>Created by {{ object.author}} on {{ object.date }}</span>
     <span><a class="text-muted" href="#">view all tickets by {{ object.author }}</a></span>
     <span class="bg-secondary text-white float-right p-1">Status: {{ object.status }}</span>
+    
 
     <hr>
     <div>
       {{ object.description|truncatewords:25 }}
+    </div>
+    <hr>
+    <div>
+      comments({{object.num_comments}})
     </div>
   </div>
   <a class="btn btn-outline-secondary m-4" href="{% url 'ticket-detail' object.id %}">Details</a>
