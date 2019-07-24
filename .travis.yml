@@ -8,7 +8,7 @@ before_install:
 before_script:
   - psql -c 'create database test_db;' -U postgres
   - python manage.py migrate --noinput
-  - python manage.py collectstatic
+  - python manage.py collectstatic --noinput
 install: 
   - pip install -r requirements.txt
 script:
