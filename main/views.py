@@ -87,7 +87,7 @@ def search_tickets(request):
 
 def filter(request):
     kwargs={}
-    if request.method == "GET":
+    if request.GET: # will be ignored if the user gets filter url directly
         if request.GET['qa'] != 'all':
             kwargs['ticket_type'] = request.GET['qa']
         if request.GET['qb'] != 'all' :

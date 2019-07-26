@@ -1,7 +1,7 @@
 {% extends 'main/base.html' %}
 {% block content %}
 
-    <form class="form-inline" methog="GET" action="{% url 'filter' %}">
+    <form class="form-inline mt-4" methog="GET" action="{% url 'filter' %}">
 
         <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Type:</label>
         <select class="custom-select my-1 mr-sm-2" name="qa" id="inlineFormCustomSelectPref">
@@ -47,7 +47,8 @@
     </div>
     <hr>
     <div>
-      comments({{ object.num_comments }}) votes({{ object.votes.count }})
+        <span>({{ object.num_comments }}) comments</span> 
+        <span class="ml-4">({{ object.votes.count }}) votes</span>
     </div>
   </div>
   <a class="btn btn-outline-secondary m-4" href="{% url 'ticket-detail' object.id %}">Details</a>
