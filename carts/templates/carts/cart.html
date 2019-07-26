@@ -2,24 +2,23 @@
 {% block content %}
 <h1>Cart</h1>
 <h3>Total payment: &euro;{{ total }}</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Ticket ID</th>
-            <th scope="col">Title</th>
-            <th scope="col">Payment</th>
-            <th scope="col">Update amount</th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="row mt-4 mb-4 font-weight-bold">
+    <div class="col-2">Ticket ID</div>
+    <div class="col-2">Title</div>
+    <div class="col-2">Payment</div>
+    <div class="col">Update amount</div>
+</div>
+<div class="row">
+    <div class="col">
         {% for item in cart_items %}
-        <tr>
-            <th scope="col">{{ item.id }}</th>
-            <th scope="col">"{{ item.ticket.title }}"</th>
 
-            <th scope="col">{{ item.payment }}</th>>
+        <div class="row mb-2">
+            <div class="col-2">{{ item.id }}</div>
+            <div class="col-2">"{{ item.ticket.title }}"</div>
 
-            <th scope="col">
+            <div class="col-2">{{ item.payment }}</div>
+
+            <div class="col">
                 <form class="form-inline" method="post" action="{% url 'adjust-cart' item.id %}">
                     {% csrf_token %}
                     <div class="form-group">
@@ -28,15 +27,16 @@
                             <input name="payment" type="number" min="0" max="999" class="form-control" required>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-secondary">Update</button>
-                    <a href="{% url 'remove-item' item.id %}" class="btn btn-danger">Remove</a>
+                    <button type="submit" class="btn btn-secondary ml-2">Update</button>
+                    <a href="{% url 'remove-item' item.id %}" class="btn btn-danger ml-2">Remove</a>
                 </form>
-            </th>
-        </tr>
+            </div>
+        </div>
+
         {% endfor %}
-    </tbody>
-</table>
+    </div>
+</div>
 {% if total > 0 %}
-<a class="btn btn-info" href="{% url 'checkout' %}">Checkout</a>
+<a class="btn btn-info mt-4" href="{% url 'checkout' %}">Checkout</a>
 {% endif %}
 {% endblock content %}
