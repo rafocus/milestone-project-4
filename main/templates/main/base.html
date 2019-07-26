@@ -24,8 +24,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarToggle">
                 <div class="navbar-nav mr-auto">
-                    <a class="nav-item nav-link" href="{% url 'features' %}">Features</a>
-                    <a class="nav-item nav-link" href="{% url 'bugs' %}">Bugs</a>
+                    <a class="nav-item nav-link" href="{% url 'ticket-create' %}">New Ticket</a>
                     <a class="nav-item nav-link" href="{% url 'cart' %}">Cart</a>
                 </div>
                 <div class="navbar-nav">
@@ -37,7 +36,7 @@
                     {% if user.is_authenticated %}
                     <a class="nav-item nav-link" href="{% url 'profile' %}">Hello {{user.username}}</a>
                     <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
-                    <a class="nav-item nav-link" href="{% url 'ticket-create' %}">New Ticket</a>
+                    
                     {% else %}
                     <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
                     <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
