@@ -27,8 +27,22 @@ class TestMainViews(TestCase):
     def test_main_detail_view(self):
         user = User.objects.get(username='testuser')
         ticket = Ticket.objects.get(title="test title", author=user)
-        edit_url = reverse('ticket-detail', kwargs={'pk': ticket.id})
-        response = self.client.get(edit_url)
+        detail_url = reverse('ticket-detail', kwargs={'pk': ticket.id})
+        response = self.client.get(detail_url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_main_update_view(self):
+        user = User.objects.get(username='testuser')
+        ticket = Ticket.objects.get(title="test title", author=user)
+        update_url = reverse('ticket-update', kwargs={'pk': ticket.id})
+        response = self.client.get(update_url, follow=True)
+        self.assertEqual(response.status_code, 200)
+
+    def test_main_delete_view(self):
+        user = User.objects.get(username='testuser')
+        ticket = Ticket.objects.get(title="test title", author=user)
+        delete_url = reverse('ticket-delete', kwargs={'pk': ticket.id})
+        response = self.client.get(delete_url, follow=True)
         self.assertEqual(response.status_code, 200)
 
 class TestMainModels(TestCase):
