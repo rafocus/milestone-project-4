@@ -12,10 +12,8 @@ class TicketListView(ListView): # generic list view, variable passed is object_l
     model = Ticket
     ordering = ['-date']
     paginate_by = 10
-    queryset = Ticket.objects.annotate(num_comments=Count('comment')) # aggregate comment numbers
-
-# class TicketDetailView(DetailView): #generic detail view, variable passed is object
-#     model = Ticket
+    # aggregate the number of comments and votes
+    queryset = Ticket.objects.annotate(num_comments=Count('comment')).annotate(Count('votes', distinct=True))
 
 class TicketCreateView(LoginRequiredMixin, CreateView):
     model = Ticket
