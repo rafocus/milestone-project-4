@@ -9,12 +9,26 @@ from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, RedirectView
 
 
+# class TicketListView(ListView): # generic list view, variable passed is object_list
+#     model = Ticket
+#     ordering = ['-date']
+#     paginate_by = 10
+#     # aggregate the number of comments
+#     queryset = Ticket.objects.annotate(num_comments=Count('comment'))
+
 class TicketListView(ListView): # generic list view, variable passed is object_list
     model = Ticket
     ordering = ['-date']
     paginate_by = 10
     # aggregate the number of comments
-    queryset = Ticket.objects.annotate(num_comments=Count('comment'))
+    def get_queryset(self):
+        kwargs={}
+        if 'qa' in self.request.GET:
+            if self.request.GET['qa'] != 'all':
+                kwargs['ticket_type'] = self.request.GET['qa']
+            if self.request.GET['qb'] != 'all' :
+                kwargs['status'] = self.request.GET['qb']
+        return Ticket.objects.filter(**kwargs).annotate(num_comments=Count('comment'))
 
 class TicketCreateView(LoginRequiredMixin, CreateView):
     model = Ticket
@@ -84,18 +98,6 @@ def ticket_detail(request, pk):
 
 def search_tickets(request):
     tickets = Ticket.objects.filter(title__icontains=request.GET['q'])
-    return render(request, "main/ticket_list.html", {"object_list": tickets})
-
-def filter(request):
-    kwargs={}
-    if request.GET: # will be ignored if the user gets filter url directly
-        if request.GET['qa'] != 'all':
-            kwargs['ticket_type'] = request.GET['qa']
-        if request.GET['qb'] != 'all' :
-            kwargs['status'] = request.GET['qb']
-
-    tickets = Ticket.objects.filter(**kwargs).annotate(num_comments=Count('comment'))
-    
     return render(request, "main/ticket_list.html", {"object_list": tickets})
 
 def features(request):
