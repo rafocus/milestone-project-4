@@ -1,6 +1,8 @@
 body {
+    font-family: 'PT Sans', sans-serif;
+    font-weight: 300;
     padding-bottom: 5rem;
-    background-color: white)
+    background-color: white;
 }
 
 .ticket-bg-d {

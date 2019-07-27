@@ -8,19 +8,11 @@ from comments.forms import CommentForm
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, RedirectView
 
-
-# class TicketListView(ListView): # generic list view, variable passed is object_list
-#     model = Ticket
-#     ordering = ['-date']
-#     paginate_by = 10
-#     # aggregate the number of comments
-#     queryset = Ticket.objects.annotate(num_comments=Count('comment'))
-
 class TicketListView(ListView): # generic list view, variable passed is object_list
     model = Ticket
     ordering = ['-date']
     paginate_by = 10
-    # aggregate the number of comments
+    
     def get_queryset(self):
         kwargs={}
         if 'qa' in self.request.GET:
@@ -28,7 +20,7 @@ class TicketListView(ListView): # generic list view, variable passed is object_l
                 kwargs['ticket_type'] = self.request.GET['qa']
             if self.request.GET['qb'] != 'all' :
                 kwargs['status'] = self.request.GET['qb']
-        return Ticket.objects.filter(**kwargs).annotate(num_comments=Count('comment'))
+        return Ticket.objects.filter(**kwargs).annotate(num_comments=Count('comment'))# aggregate the number of comments
 
 class TicketCreateView(LoginRequiredMixin, CreateView):
     model = Ticket

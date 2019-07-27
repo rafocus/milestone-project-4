@@ -1,33 +1,33 @@
 {% extends 'main/base.html' %}
 {% block content %}
-
-    <form class="form-inline mt-4" methog="GET" action="{% url 'main-home' %}">
-
-        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Type:</label>
-        <select class="custom-select my-1 mr-sm-2" name="qa" id="inlineFormCustomSelectPref">
-          <option selected value="all">All</option>
-          <option value="Bug">Bug</option>
-          <option value="Feature">Feature</option>
-        </select>
-
-        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Status:</label>
-        <select class="custom-select my-1 mr-sm-2" name="qb" id="inlineFormCustomSelectPref">
-          <option selected value="all">All</option>
-          <option value="Pending">Pending</option>
-          <option value="In progress">In progress</option>
-          <option value="Completed">Completed</option>
-        </select>
-      
-        <button type="submit" class="btn btn-primary my-1">Submit</button>
-      </form>
 <div class="mt-4">
-    <span >Status:</span>
-    <span class="completed pl-1">Completed</span>
-    <span class="inprogress pl-1">In progress</span>
-    <span class="pending pl-1">Pending</span>
-    <span class="awaiting pl-1">Awaiting quote</span>
+  <span>Status:</span>
+  <span class="completed pl-1">Completed</span>
+  <span class="inprogress pl-1">In progress</span>
+  <span class="pending pl-1">Pending</span>
+  <span class="awaiting pl-1">Awaiting quote</span>
 </div>
-<h1>Results ({{ page_obj.paginator.count }})</h1>
+<form class="form-inline mt-4" methog="GET" action="{% url 'main-home' %}">
+
+  <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Type:</label>
+  <select class="custom-select my-1 mr-sm-2" name="qa" id="inlineFormCustomSelectPref">
+    <option selected value="all">All</option>
+    <option value="Bug">Bug</option>
+    <option value="Feature">Feature</option>
+  </select>
+
+  <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Status:</label>
+  <select class="custom-select my-1 mr-sm-2" name="qb" id="inlineFormCustomSelectPref">
+    <option selected value="all">All</option>
+    <option value="Pending">Pending</option>
+    <option value="In progress">In progress</option>
+    <option value="Completed">Completed</option>
+  </select>
+
+  <button type="submit" class="btn btn-primary my-1">Submit</button>
+</form>
+
+<h1 class="mt-4">Results ({{ page_obj.paginator.count }})</h1>
 {% for object in object_list %}
 <div class="media mt-4 p-2 ticket-bg-l">
   <div class="media-body">
@@ -45,20 +45,17 @@
     {% endif %}
     ">
       <span class="text-muted">Ticket Number: {{ object.id }}</span>
-      <h5 class="mt-0">{{ object.title }}</h5>
+      <h5 class="mt-0">"{{ object.title }}"</h5>
     </div>
-    <span>Created by {{ object.author}} on {{ object.date }}</span>
-    <span><a class="text-muted" href="#">view all tickets by {{ object.author }}</a></span>
-    
-
+    <span>Created by <span class="text-muted">{{ object.author}}</span> on {{ object.date|date }}</span>
     <hr>
     <div>
       {{ object.description|truncatewords:25 }}
     </div>
     <hr>
     <div>
-        <span>({{ object.num_comments }}) comments</span> 
-        <span class="ml-4">({{ object.votes.count }}) votes</span>
+      <span>({{ object.num_comments }}) comments</span>
+      <span class="ml-4">({{ object.votes.count }}) votes</span>
     </div>
   </div>
   <a class="btn btn-outline-secondary m-4" href="{% url 'ticket-detail' object.id %}">Details</a>
@@ -66,13 +63,13 @@
 {% endfor %}
 {% if is_paginated %}
 <div class="mt-4">
-    {% if page_obj.has_previous %}
-    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-    {% endif %}
-    <a class="btn btn-info mb-4" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a>
-    {% if page_obj.has_next %}
-    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
-    {% endif %}
+  {% if page_obj.has_previous %}
+  <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+  {% endif %}
+  <a class="btn btn-info mb-4" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a>
+  {% if page_obj.has_next %}
+  <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+  {% endif %}
 </div>
 {% endif %}
 {% endblock content %}

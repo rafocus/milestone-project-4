@@ -17,7 +17,6 @@
         <div class="row">
             <div class="row">
                 <div class="col small">Created by {{ object.author}} ({{ object.date|timesince }}) ago</div>
-                <div class="col small"><a class="text-muted" href="#">view all tickets by {{ object.author }}</a></div>
                 <div class="col small">Status: {{ object.status }}</div>
                 {% if object.ticket_type == "Feature" %}
                 <span>funding: {{ object.funding }} / {{ object.funding_target }}</span>
