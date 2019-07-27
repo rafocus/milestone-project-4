@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
+from main.models import Ticket
 
 
 def register(request):
@@ -17,5 +18,7 @@ def register(request):
     return render(request, 'users/register.html', {'form': form})
 
 @login_required
-def profile(request):
-    return render(request, 'users/profile.html')
+def dashboard(request):
+    user = request.user
+    tickets = Ticket.objects.filter(author=user)
+    return render(request, 'users/dashboard.html', {'tickets': tickets})

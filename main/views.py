@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.paginator import Paginator
 from .models import Ticket
 from comments.models import Comment
 from django.db.models import Count
@@ -12,7 +13,7 @@ class TicketListView(ListView): # generic list view, variable passed is object_l
     model = Ticket
     ordering = ['-date']
     paginate_by = 10
-    # aggregate the number of comments and votes
+    # aggregate the number of comments
     queryset = Ticket.objects.annotate(num_comments=Count('comment'))
 
 class TicketCreateView(LoginRequiredMixin, CreateView):
@@ -94,7 +95,7 @@ def filter(request):
             kwargs['status'] = request.GET['qb']
 
     tickets = Ticket.objects.filter(**kwargs).annotate(num_comments=Count('comment'))
-
+    
     return render(request, "main/ticket_list.html", {"object_list": tickets})
 
 def features(request):

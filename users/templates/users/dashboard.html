@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<!-- user is built in django, does not need to be passed in to the template -->
+<h1>{{ user.username }} Dashboard</h1>
+<h3 class="text-primary mt-4">All my tickets: ({{ tickets.count }})</h3>
+<span class="completed pl-1">Completed</span>
+<span class="inprogress pl-1">In progress</span>
+<span class="pending pl-1">Pending</span>
+<ul class="list-group mt-4">
+    {% for ticket in tickets %}
+    <li class="list-group-item
+    {% if ticket.status == 'In progress' %}
+    inprogress
+    {% elif ticket.status == 'Completed' %}
+    completed
+    {% else %}
+    pending
+    {% endif %}
+    ">
+        <span>{{ forloop.counter }}</span>
+        <a class="text-info ml-4" href="{% url 'ticket-detail' ticket.id %}">"{{ ticket.title }}"</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock content %}
