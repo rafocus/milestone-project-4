@@ -20,17 +20,27 @@
       
         <button type="submit" class="btn btn-primary my-1">Submit</button>
       </form>
-
+<div class="mt-4">
+    <span >Status:</span>
+    <span class="completed pl-1">Completed</span>
+    <span class="inprogress pl-1">In progress</span>
+    <span class="pending pl-1">Pending</span>
+    <span class="awaiting pl-1">Awaiting quote</span>
+</div>
 {% for object in object_list %}
 <div class="media m-4 p-2 ticket-bg-l">
   <div class="media-body">
     <div class="pl-2
-    {% if object.status == 'In progress' %} 
-    inprogress
-    {% elif object.status == 'Completed' %}
-    completed
+    {% if object.ticket_type == 'Feature' and object.funding_target == 0.00 %}
+    awaiting
     {% else %}
-    pending
+        {% if object.status == 'In progress' %}
+        inprogress
+        {% elif object.status == 'Completed' %}
+        completed
+        {% else %}
+        pending
+        {% endif %}
     {% endif %}
     ">
       <span class="text-muted">Ticket Number: {{ object.id }}</span>
