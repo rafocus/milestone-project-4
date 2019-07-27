@@ -13,10 +13,10 @@
         {% for item in cart_items %}
 
         <div class="row mb-2">
-            <div class="col-2">{{ item.id }}</div>
+            <div class="col-2"># {{ item.id }}</div>
             <div class="col-2">"{{ item.ticket.title }}"</div>
 
-            <div class="col-2">{{ item.payment }}</div>
+            <div class="col-2">&euro;{{ item.payment }}</div>
 
             <div class="col">
                 <form class="form-inline" method="post" action="{% url 'adjust-cart' item.id %}">
@@ -24,7 +24,7 @@
                     <div class="form-group">
                         <label for="exampleInputAmount" class="sr-only">New Payment</label>
                         <div class="input-group">
-                            <input name="payment" type="number" min="0" max="999" class="form-control" required>
+                            <input name="payment" type="number" min="0" max="999" class="form-control" placeholder="amount" required>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-secondary ml-2">Update</button>
