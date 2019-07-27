@@ -7,15 +7,20 @@
 <span class="completed pl-1">Completed</span>
 <span class="inprogress pl-1">In progress</span>
 <span class="pending pl-1">Pending</span>
+<span class="awaiting pl-1">Awaiting quote</span>
 <ul class="list-group mt-4">
     {% for ticket in tickets %}
     <li class="list-group-item
-    {% if ticket.status == 'In progress' %}
-    inprogress
-    {% elif ticket.status == 'Completed' %}
-    completed
+    {% if ticket.ticket_type == 'Feature' and ticket.funding_target == 0.00 %}
+    awaiting
     {% else %}
-    pending
+        {% if ticket.status == 'In progress' %}
+        inprogress
+        {% elif ticket.status == 'Completed' %}
+        completed
+        {% else %}
+        pending
+        {% endif %}
     {% endif %}
     ">
         <span>{{ forloop.counter }}</span>

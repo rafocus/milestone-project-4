@@ -29,6 +29,12 @@ body {
     border-left-width: 10px;
 }
 
+.awaiting {
+    border-left-style: solid;
+    border-left-color: orange;
+    border-left-width: 10px;
+}
+
 .comment textarea {
     height: 70px;
 }
