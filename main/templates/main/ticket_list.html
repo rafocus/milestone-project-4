@@ -43,7 +43,11 @@
         {% endif %}
     {% endif %}
   ">
-  <span class="text-muted">Ticket #{{ object.id }}</span>
+  <span class="text-muted">Ticket #{{ object.id }} |</span>
+  <span class="text-primary">
+    {% if object.ticket_type == 'Feature' %}F{% endif %}
+    {% if object.ticket_type == 'Bug' %}B{% endif %}
+  </span>
   </div>
   <div class="col-md-4 pt-2 pb-2 font-weight-bold"><span class="mt-0">"{{ object.title }}"</span></div>
   <div class="col-md-4 pt-2 pb-2"><span>Created by <span class="text-muted">{{ object.author}}</span> on {{ object.date|date }}</span></div>

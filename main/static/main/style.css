@@ -42,11 +42,11 @@ body {
 }
 
 .odd {
-    background-color: rgb(231, 230, 230);
+    background-color: white;
 }
 
 .even {
-    background-color: rgb(241, 241, 241);
+    background-color: rgb(243, 243, 243);
 }
 
 .description {
