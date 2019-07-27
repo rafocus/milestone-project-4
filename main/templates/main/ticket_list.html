@@ -29,10 +29,9 @@
 
 <h1 class="mt-4">Results ({{ page_obj.paginator.count }})</h1>
 {% for object in object_list %}
-<div class="media mt-4 p-2 ticket-bg-l">
-  <div class="media-body">
-    <div class="pl-2
-    {% if object.ticket_type == 'Feature' and object.funding_target == 0.00 %}
+<div class="row mt-4 ticket-bg-d">
+  <div class="col-md-4 pt-2 pb-2
+  {% if object.ticket_type == 'Feature' and object.funding_target == 0.00 %}
     awaiting
     {% else %}
         {% if object.status == 'In progress' %}
@@ -43,32 +42,35 @@
         pending
         {% endif %}
     {% endif %}
-    ">
-      <span class="text-muted">Ticket Number: {{ object.id }}</span>
-      <h5 class="mt-0">"{{ object.title }}"</h5>
-    </div>
-    <span>Created by <span class="text-muted">{{ object.author}}</span> on {{ object.date|date }}</span>
-    <hr>
-    <div>
+  ">
+  <span class="text-muted">Ticket #{{ object.id }}</span>
+  </div>
+  <div class="col-md-4 pt-2 pb-2 font-weight-bold"><span class="mt-0">"{{ object.title }}"</span></div>
+  <div class="col-md-4 pt-2 pb-2"><span>Created by <span class="text-muted">{{ object.author}}</span> on {{ object.date|date }}</span></div>
+</div>
+<div class="row justify-content-around ticket-bg-l pt-2 pb-2">
+  <div class="col-md-6 description pt-2 pb-2">
       {{ object.description|truncatewords:25 }}
-    </div>
-    <hr>
-    <div>
+  </div>
+  <div class="col-md-2 pt-2 pb-2">
+      <a class="btn btn-outline-secondary small" href="{% url 'ticket-detail' object.id %}">Open</a>
+  </div>
+</div>
+<div class="row ticket-bg-l">
+  <div class="col-md-4 pt-2 pb-2">
       <span>({{ object.num_comments }}) comments</span>
       <span class="ml-4">({{ object.votes.count }}) votes</span>
-    </div>
   </div>
-  <a class="btn btn-outline-secondary m-4" href="{% url 'ticket-detail' object.id %}">Details</a>
 </div>
 {% endfor %}
 {% if is_paginated %}
 <div class="mt-4">
   {% if page_obj.has_previous %}
-  <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+  <a class="btn btn-outline-primary mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
   {% endif %}
-  <a class="btn btn-info mb-4" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a>
+  <a class="btn btn-primary mb-4" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a>
   {% if page_obj.has_next %}
-  <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+  <a class="btn btn-outline-primary mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
   {% endif %}
 </div>
 {% endif %}
