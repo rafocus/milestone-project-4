@@ -1,3 +1,10 @@
+{% url 'ticket-create' as new_ticket_url %}
+{% url 'cart' as cart %}
+{% url 'message-create' as message_create %}
+{% url 'main-about' as help %}
+{% url 'register' as register %}
+{% url 'dashboard' as dashboard %}
+{% url 'login' as login %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -24,24 +31,25 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarToggle">
                 <div class="navbar-nav mr-auto">
-                    <a class="nav-item nav-link" href="{% url 'ticket-create' %}">New Ticket</a>
-                    <a class="nav-item nav-link" href="{% url 'cart' %}">Cart</a>
-                    <a class="nav-item nav-link" href="{% url 'message-create' %}">Contact</a>
-                    <a class="nav-item nav-link" href="{% url 'main-about' %}">Help</a>
+                    <a class="nav-item nav-link {% if request.path == new_ticket_url %} active {% endif %}" href="{% url 'ticket-create' %}">New Ticket</a>
+                    <a class="nav-item nav-link {% if request.path == cart %} active {% endif %}" href="{% url 'cart' %}">Cart</a>
+                    <a class="nav-item nav-link {% if request.path == message_create %} active {% endif %}" href="{% url 'message-create' %}">Contact</a>
+                    <a class="nav-item nav-link {% if request.path == help %} active {% endif %}" href="{% url 'main-about' %}">Help</a>
                 </div>
                 <div class="navbar-nav">
                     <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="GET" novalidate>
-                        <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search" aria-label="Search">
+                        <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search"
+                            aria-label="Search">
                         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                     </form>
                     <!-- display login, register, logout, depending if the user is authenticated -->
                     {% if user.is_authenticated %}
-                    <a class="nav-item nav-link" href="{% url 'dashboard' %}">{{user.username}} Dashboard</a>
+                    <a class="nav-item nav-link {% if request.path == dashboard %} active {% endif %}" href="{% url 'dashboard' %}">{{user.username}} Dashboard</a>
                     <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
-                    
+
                     {% else %}
-                    <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-                    <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+                    <a class="nav-item nav-link {% if request.path == login %} active {% endif %}" href="{% url 'login' %}">Login</a>
+                    <a class="nav-item nav-link {% if request.path == register %} active {% endif %}" href="{% url 'register' %}">Register</a>
                     {% endif %}
                 </div>
             </div>
@@ -60,6 +68,16 @@
             </div>
         </div>
     </main>
+    <footer>
+        <div class="container p-3 ">
+            <div class="row justify-content-center ">
+                <div class="col-12 text-center">
+                    <h5>Rafocus</h5>
+                    <p>Copyright &copy; 2019</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
