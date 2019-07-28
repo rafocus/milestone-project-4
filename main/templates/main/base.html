@@ -5,6 +5,7 @@
 {% url 'register' as register %}
 {% url 'dashboard' as dashboard %}
 {% url 'login' as login %}
+{% url 'main-home' as main_home %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -22,9 +23,11 @@
 </head>
 
 <body>
+        <div id="page-container">
+                <div id="content-wrap">
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #3e71ac;">
         <div class="container">
-            <a class="navbar-brand mr-4" href="{% url 'main-home'%}">Issuetrack</a>
+            <a class="navbar-brand mr-4 {% if request.path == main_home %} active {% endif %}" href="{% url 'main-home'%}">Issuetrack</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
                 aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -68,17 +71,16 @@
             </div>
         </div>
     </main>
-    <footer>
-        <div class="container p-3 ">
+    </div>
+    <footer id="footer">
             <div class="row justify-content-center ">
                 <div class="col-12 text-center">
                     <h5>Rafocus</h5>
                     <p>Copyright &copy; 2019</p>
                 </div>
             </div>
-        </div>
     </footer>
-
+</div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
