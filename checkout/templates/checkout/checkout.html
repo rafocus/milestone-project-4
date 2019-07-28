@@ -2,42 +2,67 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block head_js %}
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script type="text/javascript">
     //<![CDATA[
-        Stripe.publishableKey = '{{ publishable }}';
+    Stripe.publishableKey = '{{ publishable }}';
     //]]>
 </script>
 <script type="text/javascript" src="{% static 'checkout/stripe.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-<div class="">
-    <h1>Items:</h1>
-    {% for item in cart_items %}
-    <h3>{{ item.ticket.title }}</h3>
-    <p>{{ item.payment }}</p>
-    {% endfor %}
+<div class="row mt-4">
+    <div class="col">
+        <h1>Checkout</h1>
+        <h2 class="text-primary">Total payment: &euro;{{ total }}</h2>
+    </div>
 </div>
-<div class="">
-    <p>Total: &euro;{{ total }}</p>
+{% if total > 0 %}
+<div class="row mt-4 mb-4 font-weight-bold">
+    <div class="col-2">Ticket ID</div>
+    <div class="col-2">Title</div>
+    <div class="col-2">Payment</div>
+    <div class="col">Update amount</div>
 </div>
+<div class="row">
+    <div class="col">
+        {% for item in cart_items %}
+        <div class="row mb-2">
+            <div class="col-2"># {{ item.id }}</div>
+            <div class="col-2">"{{ item.ticket.title }}"</div>
 
-<form role="form" method="POST" id="payment-form" action="{% url 'checkout' %}">
-        {% csrf_token %}
-    <legend>Payment Details</legend>
+            <div class="col-2">&euro;{{ item.payment }}</div>
+        </div>
 
-    <div id="credit-card-errors" style="display: none;">
-        <div id="alert-message block-message error" id="stripe-error-message"></div>
+        {% endfor %}
     </div>
+</div>
+<div class="row mt-4">
+    <div class="col">
+        <form role="form" method="POST" id="payment-form" action="{% url 'checkout' %}">
+            {% csrf_token %}
+            <legend>Payment Details</legend>
 
-    <div class="form-group col-md-6">
-        {{ order_form|crispy }}
-        {{ payment_form|crispy }}
+            <div id="credit-card-errors" style="display: none;">
+                <div id="alert-message block-message error" id="stripe-error-message"></div>
+            </div>
+
+            <div class="form-group col-md-6">
+                {{ order_form|crispy }}
+                {{ payment_form|crispy }}
+            </div>
+            <div class="form-group col-md-12">
+                <input class=" btn btn-primary" id="submit_payment_btn" name="commit" type="submit"
+                    value="Submit Payment">
+            </div>
+        </form>
     </div>
-    <div class="form-group col-md-12">
-        <input class=" btn btn-primary" id="submit_payment_btn" name="commit" type="submit" value="Submit Payment">
-    </div>
-</form>
+</div>
+{% else %}
+<span>The cart is empty!</span>
+{% endif %}
 {% endblock %}

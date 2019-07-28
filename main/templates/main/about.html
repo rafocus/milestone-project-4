@@ -1,4 +1,35 @@
 {% extends 'main/base.html' %}
 {% block content %}
-    <p>about page</p>
+<div class="row justify-content-around about mt-4">
+    <div class="col-8 ticket-bg-d p-2">
+        <h1 class="font-weight-bold">Help</h1>
+    </div>
+</div>
+<div class="row justify-content-around about">
+    <div class="col-8">
+        <div class="card p-4">
+            <h2 class="font-weight-bold">Create an account:</h2>
+            <p>To create and account you go register, then create a new account using a username, email, and password.</p>
+        </div>
+        <div class="card p-4">
+            <h2 class="font-weight-bold">Create an ticket:</h2>
+            <p>You can create two types of tickets, features or bugs. Go to New Ticket, fill in the form with informations then submit.</p>
+        </div>
+        <div class="card p-4">
+            <h2 class="font-weight-bold">Features:</h2>
+            <p>When you request a new feature, the admin will give a quote for it to be implemented, users can vote and comment on featues to show their interest, they can donate amounts of a minimum of 5 euros, when the target funding is reached then the implementations will start.</p>
+        </div>
+        <div class="card p-4">
+            <h2 class="font-weight-bold">Bugs:</h2>
+            <p>The submission of bugs is free of chage, users can vote and comment on the bugs tickets to show that they are affected by it and contribute with more details.</p>
+        </div>
+        <div class="card p-4">
+            <h2 class="font-weight-bold">Payments:</h2>
+            <p>You can pay using a debit or credit card, all major cards are supported.</p>
+        </div>
+        
+    </div>
+</div>
+
+
 {% endblock content %}

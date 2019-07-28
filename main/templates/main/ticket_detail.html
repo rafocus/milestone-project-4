@@ -18,8 +18,8 @@
         ">
             <span class="text-muted">Ticket #{{ object.id }} |</span>
             <span class="text-primary">
-                {% if object.ticket_type == 'Feature' %}F{% endif %}
-                {% if object.ticket_type == 'Bug' %}B{% endif %}
+                {% if object.ticket_type == 'Feature' %} Feature {% endif %}
+                {% if object.ticket_type == 'Bug' %} Bug {% endif %}
             </span>
         </div>
         <div class="col-md-4 pt-2 pb-2">
