@@ -31,37 +31,43 @@ Password: testpass1
 ### Existing Features
 
 - User authentication
+- User dashboard
 - List view of all tickets
 - Search, results filtering
 - Detail view 
 - Commenting
 - Voting
+- Contact messaging
 - Cart
 - Checkout
 - Payment using Stripe
+- Continuous integration with Travic Ci
 
 ### Features left to implement
 
 - Blog
-- Contact page
 - Detailed progress page
+- Various charts on activity and progress
+- Write more automated tests
 
 ## Technologies used
 
 - HTML5, CSS3, Bootstrap
 - Javascript
 - Python language
-- Djamgo framework
+- Django framework
 - Postgres database system
 - Django crispy forms
 - Heroku to deploy a Demo app
-- Environ
+- Environ to manage environments
 - Whitenoise
 - Stripe
 - Travis Ci
 
 ## Testing
-...
+
+- Manual testing was caried out to test all routes and functionalities expected in the user stories.
+- A number of automated tests were implemeneted using Django testing module.
 
 ## Deployment
 
@@ -82,6 +88,8 @@ $ heroku run python manage.py createsuperuser
 $ heroku run python manage.py collectstatic  
 
 ## Credits
+
+- Snippets of code from Code Institute Material, especially the shopping cart module and integration with Stripe.
 
 ### Design
 
