@@ -1,5 +1,5 @@
 body {
-    font-family: 'PT Sans', sans-serif;
+    font-family: sans-serif;
     font-weight: 300;
     padding-bottom: 5rem;
     background-color: rgb(233, 233, 233);
@@ -50,7 +50,13 @@ body {
 }
 
 .description {
-    border-bottom-style: solid;
-    border-bottom-color: rgb(187, 187, 187);
-    border-bottom-width: 2px;
+    background-color: rgb(241, 241, 241)
+}
+
+section h2, h1 {
+    font-size: 1.2rem;
+}
+
+section h3 {
+    font-size: 1rem;
 }

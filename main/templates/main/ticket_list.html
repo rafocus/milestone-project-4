@@ -29,6 +29,7 @@
 
 <h1 class="mt-4">Results ({{ page_obj.paginator.count }})</h1>
 {% for object in object_list %}
+<section>
 <div class="row mt-4 ticket-bg-d">
   <div class="col-md-4 pt-2 pb-2
   {% if object.ticket_type == 'Feature' and object.funding_target == 0.00 %}
@@ -49,11 +50,12 @@
     {% if object.ticket_type == 'Bug' %}B{% endif %}
   </span>
   </div>
-  <div class="col-md-4 pt-2 pb-2 font-weight-bold"><span class="mt-0">"{{ object.title }}"</span></div>
+  <div class="col-md-4 pt-2 pb-2"><h2 class="mt-0 font-weight-bold">{{ object.title }}</h2></div>
   <div class="col-md-4 pt-2 pb-2"><span>Created by <span class="text-muted">{{ object.author}}</span> on {{ object.date|date }}</span></div>
 </div>
 <div class="row justify-content-around ticket-bg-l pt-2 pb-2">
-  <div class="col-md-6 description pt-2 pb-2">
+  <div class="col-md-8 description pt-2 pb-2">
+      <h3 class="font-weight-bold">Description</h3>
       {{ object.description|truncatewords:25 }}
   </div>
   <div class="col-md-2 pt-2 pb-2">
@@ -66,6 +68,7 @@
       <span class="ml-4">({{ object.votes.count }}) votes</span>
   </div>
 </div>
+</section>
 {% endfor %}
 {% if is_paginated %}
 <div class="mt-4">
