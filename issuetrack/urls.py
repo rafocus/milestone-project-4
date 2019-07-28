@@ -8,6 +8,7 @@ urlpatterns = [
     path('', include('main.urls') ),
     path('', include('carts.urls') ),
     path('', include('checkout.urls') ),
+    path('', include('contact.urls') ),
     path('register/', user_views.register, name='register'),
     path('dashboard/', user_views.dashboard, name='dashboard'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
