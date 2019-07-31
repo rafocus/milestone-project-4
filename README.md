@@ -66,6 +66,8 @@ Password: testpass1
 
 ## Testing
 
+- HTML and CSS was validated using W3 tool
+- The web application was tested on different screen sizes and mobile
 - Manual testing was caried out to test all routes and functionalities expected in the user stories.
 - A number of automated tests were implemeneted using Django testing module.
 
