@@ -6,7 +6,7 @@ A web application to serve as a ticket system to track issues, help developers a
 
 Demo application deployed [here](https://issuetrack2019.herokuapp.com/)  
 
-Demo login:  
+Demo login: (has staff admin rights, '/admin/')
 Username: testuser  
 Password: testpass1  
 
@@ -19,12 +19,13 @@ Password: testpass1
 
 ### User stories:
 
-- A user can view the tickets list on the home page, can view the details of every ticket, the comments, can make payment without being authenticated.
+- A user can view the tickets list on the home page, can view the details of every ticket, the comments, can make payment.
 - A user can create an account. 
 - An authenticated user can create a ticket of a Bug or feature type, comment, vote, pay for features.
 - When a feature ticket is created, a superuser will add a target budget for the funding.
 - Users can pay a minimum amount and above for a feature, when the target is reached, the feature can start being implemented.
-- A ticket status to indicate: in progress, completed, pending.
+- A ticket status to indicate: in progress, completed, pending, awiting quote.
+- Display balance between the target funding and funds collected so far for each feature.
 
 ## Features
 
@@ -68,8 +69,28 @@ Password: testpass1
 
 - HTML and CSS was validated using W3 tool
 - The web application was tested on different screen sizes and mobile
-- Manual testing was caried out to test all routes and functionalities expected in the user stories.
-- A number of automated tests were implemeneted using Django testing module.
+- A number of automated tests were implemeneted using Django testing module to test models, forms, views.
+- the automated tests run during the continuous integration with Travis Ci 
+- Manual testing was caried out to test all routes and functionalities expected in the user stories as follows:
+- Search on the home page with all the combinations.
+- Create a new ticket without being authenticated.
+- Ssend a message without authentication
+- Vote without authentication
+- Commenting without authentication
+- Checkout without authentication.
+- Register new user with an already existing username
+- Register new user with an already existing email
+- Login with invalid credentials
+- Vote when logged in, then tested the total number of votes displayed in the list view
+- Posting few comments then tested the number of comments for each ticket in the list view
+- Updating a ticket, tested changing the type from bug o feature and vice versa
+- Deleting a ticket, tested the search results and list view 
+- Adding an amount to the cart, with more than one ticket.
+- Updating the cart amounts, deleting tickets from the cart
+- Checkout, payment confirmation
+- Tested if the funding balance and target is correct
+- Updating the feature price from the admin
+
 
 ## Deployment
 
@@ -77,7 +98,7 @@ Password: testpass1
 - Start a virtual environement with pipenv
 - Install dependencies with 'pipenv install'
 - Initiate a git local repository
-- For local testing and development, create .env file and include values for these variables: SECRET_KEY, DEBUG, STRIPE_SECRET, STRIPE_PUBLISHABLE, DATABASE_URL
+- For local testing and development, create .env file and include values for these variables: SECRET_KEY, DEBUG, STRIPE_SECRET,     STRIPE_PUBLISHABLE, DATABASE_URL
 - Create accounts for Heroku, Stripe
 - Create an app in heroku and add postgres addon, DATABASE_URL will be automatically added to the environment varibales. [help](https://devcenter.heroku.com/articles/git)
 - In Heroku settings add environement variables for: SECRET_KEY, DEBUG, STRIPE_SECRET, STRIPE_PUBLISHABLE
