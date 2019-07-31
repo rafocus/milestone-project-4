@@ -46,7 +46,7 @@
                         </div>
                         <div class="navbar-nav">
                             <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="GET" novalidate>
-                                <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search"
+                                <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search ticket"
                                     aria-label="Search">
                                 <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                             </form>
@@ -64,8 +64,9 @@
                             {% endif %}
                         </div>
                     </div>
+                </div>
             </nav>
-            <main role="main" class="container">
+            <main class="container">
                 <div class="row">
                     <div class="col">
                         {% if messages %}

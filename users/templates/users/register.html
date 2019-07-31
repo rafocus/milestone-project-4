@@ -1,21 +1,25 @@
 {% extends 'main/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="content-section">
-        <form method="POST" novalidate>
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Register</legend>
-                {{ form|crispy }}
-            </fieldset>
-            <div class="form-group">
-                <button class='btn btn-outline-info' type="submit">Sign Up</button>
+    <div class="row justify-content-around">
+        <div class="col-md-6">
+            <div class="content-section">
+                <form method="POST" novalidate>
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Register</legend>
+                        {{ form|crispy }}
+                    </fieldset>
+                    <div class="form-group">
+                        <button class='btn btn-outline-info' type="submit">Sign Up</button>
+                    </div>
+                </form>
+                <div class="border-top pt-3">
+                    <div class="text-muter">
+                        Already have an account? <a href="{% url 'register' %}">Sign In</a>
+                    </div>
+                </div>
             </div>
-        </form>
-        <div class="border-top pt-3">
-            <small class="text-muter">
-                Already have an account? <a href="{% url 'register' %}">Sign In</a>
-            </small>
         </div>
     </div>
 {% endblock content %}

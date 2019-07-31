@@ -78,7 +78,7 @@ Password: testpass1
 - For local testing and development, create .env file and include values for these variables: SECRET_KEY, DEBUG, STRIPE_SECRET, STRIPE_PUBLISHABLE, DATABASE_URL
 - Create accounts for Heroku, Stripe
 - Create an app in heroku and add postgres addon, DATABASE_URL will be automatically added to the environment varibales. [help](https://devcenter.heroku.com/articles/git)
-- In Heroku seetings add environement variables for: SECRET_KEY, DEBUG, STRIPE_SECRET, STRIPE_PUBLISHABLE
+- In Heroku settings add environement variables for: SECRET_KEY, DEBUG, STRIPE_SECRET, STRIPE_PUBLISHABLE
 - In command line execute the folling commands:  
 $ heroku git:remote -a "your_app_name"  
 $ git push heroku master  
@@ -89,7 +89,9 @@ $ heroku run python manage.py collectstatic
 
 ## Credits
 
+- Code Institute Material
 - Snippets of code from Code Institute Material, especially the shopping cart module and integration with Stripe.
+- The book "Practical Django 2 and Channels 2" by Federico Marani
 
 ### Design
 
