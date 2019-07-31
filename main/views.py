@@ -20,7 +20,9 @@ class TicketListView(ListView): # generic list view, variable passed is object_l
                 kwargs['ticket_type'] = self.request.GET['qa']
             if self.request.GET['qb'] != 'all' :
                 kwargs['status'] = self.request.GET['qb']
-        return Ticket.objects.filter(**kwargs).annotate(num_comments=Count('comment'))# aggregate the number of comments
+                # aggregate the number of comments
+        return Ticket.objects.filter(**kwargs).annotate(num_comments=Count('comment')).order_by('-date')
+
 
 class TicketCreateView(LoginRequiredMixin, CreateView):
     model = Ticket
@@ -89,5 +91,5 @@ def ticket_detail(request, pk):
     return render(request, 'main/ticket_detail.html', {"object": ticket, "pk":pk, "comments": comments, 'comment_form': comment_form})
 
 def search_tickets(request):
-    tickets = Ticket.objects.filter(title__icontains=request.GET['q'])
+    tickets = Ticket.objects.filter(title=request.GET['q']).annotate(num_comments=Count('comment')).order_by('-date')
     return render(request, "main/ticket_list.html", {"object_list": tickets})
